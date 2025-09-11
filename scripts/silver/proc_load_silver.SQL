@@ -48,7 +48,7 @@ BEGIN
 			FROM bronze.crm_cust_info
 			WHERE cst_id IS NOT NULL
 		) t
-		WHERE flag_last = 1; -- Select the most recent record per customer
+		WHERE flag_last = 1; 
 		SET @end_time = GETDATE();
         PRINT '>> Load Duration: ' + CAST(DATEDIFF(SECOND, @start_time, @end_time) AS NVARCHAR) + ' seconds';
         PRINT '>> -------------';
@@ -80,7 +80,7 @@ BEGIN
 				WHEN UPPER(TRIM(prd_line)) = 'S' THEN 'Other Sales'
 				WHEN UPPER(TRIM(prd_line)) = 'T' THEN 'Touring'
 				ELSE 'n/a'
-			END AS prd_line, -- Map product line codes to descriptive values
+			END AS prd_line, 
 			CAST(prd_start_dt AS DATE) AS prd_start_dt,
 			CAST(
 				LEAD(prd_start_dt) OVER (PARTITION BY prd_key ORDER BY prd_start_dt) - 1 
